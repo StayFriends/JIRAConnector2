@@ -18,6 +18,7 @@ class JIRAConnector {
 	const JIRAIssueType = "issuetype";
 	const JIRAIssuePriority = "priority";
 	const JIRAIssueSummary = "summary";
+	const JIRAIssueComponents = "components";
 	
 	//JIRA REST API Wrapper.
 	protected static $jiraWrapper = null;
@@ -113,12 +114,17 @@ class JIRAConnector {
 			$issuePriority = $jiraIssue["fields"][JIRAConnector::JIRAIssuePriority]["name"];
 			$issuePriorityIcon = $jiraIssue["fields"][JIRAConnector::JIRAIssuePriority]["iconUrl"];
 			$issuePriorityIconPng = str_replace('.svg', '.png', $issuePriorityIcon);
-			
 			$summary = $jiraIssue["fields"][JIRAConnector::JIRAIssueSummary];
+			$components = $jiraIssue["fields"][JIRAConnector::JIRAIssueComponents];
+			$componentsAsString = implode(array_map(function ($component) {
+			    return $component->getName();
+			}, $components);
+			
 			$output .= "<tr>";
-			$output .= "<td><img src=\"$issueTypeIcon\" alt=\"$issueType\"/></td>";
-			$output .= "<td><img src=\"$issueStatusIcon\" alt=\"$issueStatus\"/></td>";
-			$output .= "<td><img src=\"$issuePriorityIconPng\" alt=\"$issuePriority\"/></td>";
+			$output .= "<td><img src=\"$issueTypeIcon\" title=\"$issueType\"/></td>";
+			$output .= "<td><img src=\"$issueStatusIcon\" title=\"$issueStatus\"/></td>";
+			$output .= "<td><img src=\"$issuePriorityIconPng\" title=\"$issuePriority\"/></td>";
+			$output .= "<td>$componentsAsString</td>";
 			$output .= "<td><a href=\"$jiraURL/browse/$issueKey\" title=\"$summary\">";
 			if ($issueStatus == "Resolved") {
 				$output .= "<strike>"	;
