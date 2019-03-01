@@ -201,7 +201,7 @@ class JIRARestApiWrapper{
 		if (!is_null($this->userName)) {
 			//Encode credentials as base 64.
 			$credentialsEncoded = base64_encode( $this->userName . ":" . $this->userPassword );			
-			$headers[] = $credentialsEncoded;
+			$headers[] = "Authorization: Basic {$credentialsEncoded}";
 		}
 
 		//Define context options.
@@ -275,7 +275,7 @@ class JIRARestApiWrapper{
 	
 		$queryString = "";
 		if ($jql != "") {
-			$queryString = "jql=" . urlencode($jql);
+			$queryString = "jql=issue=" . urlencode($jql);
 		}
 		if ($fieldsQueryParamValue != "") {
 			$queryString = $queryString . "&fields=" . $fieldsQueryParamValue;	
