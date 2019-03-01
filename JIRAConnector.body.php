@@ -109,7 +109,7 @@ class JIRAConnector {
 					));
 
 		//Render output.
-		$output =  "<table><tbody>";
+		$output =  "<div>";
 		foreach ($returnedIssueData as $jiraIssue) 
 		{
 			$issueKey = $jiraIssue[JIRAConnector::JIRAIssueKey];
@@ -124,30 +124,28 @@ class JIRAConnector {
 			$summary = $jiraIssue["fields"][JIRAConnector::JIRAIssueSummary];
 			$issueAssignee = $jiraIssue["fields"][JIRAConnector::JIRAIssueAssignee]["displayName"];
 			$issueAssigneeAvatar = $jiraIssue["fields"][JIRAConnector::JIRAIssueAssignee]["avatarUrls"]["16x16"];
-//			$components = $jiraIssue["fields"][JIRAConnector::JIRAIssueComponents];
-//			$componentsAsString = implode(array_map(function ($component) {
-//              return $component->getName();
-//            }, $components);
+			$components = $jiraIssue["fields"][JIRAConnector::JIRAIssueComponents];
+			$componentsAsString = implode(array_map(function ($component) {
+              return $component["name"];
+            }, $components));
 			
-			$output .= "<tr>";
-			$output .= "<td><img src=\"$issueTypeIcon\" title=\"$issueType\"/></td>";
-			$output .= "<td><img src=\"$issueStatusIcon\" title=\"$issueStatus\"/></td>";
-			$output .= "<td><img src=\"$issuePriorityIconPng\" title=\"$issuePriority\"/></td>";
-//			$output .= "<td>$componentsAsString</td>";
-			$output .= "<td><img src=\"$issueAssigneeAvatar\" title=\"$issueAssignee\"/></td>";
-			$output .= "<td><a href=\"$jiraURL/browse/$issueKey\" title=\"$summary\">";
+			$output .= "<img src=\"$issueTypeIcon\" title=\"$issueType\"/>";
+			$output .= "<img src=\"$issueStatusIcon\" title=\"$issueStatus\"/>";
+			$output .= "<img src=\"$issuePriorityIconPng\" title=\"$issuePriority\"/>";
+			$output .= "<img src=\"$issueAssigneeAvatar\" title=\"$issueAssignee\" height=\"16\" width=\"16\" />";
+			$output .= "<a href=\"$jiraURL/browse/$issueKey\" title=\"$summary\">";
 			if ($issueStatus == "Resolved") {
 				$output .= "<strike>"	;
 			}
-			$output .= $issueKey;
+			$output .= "$issueKey ";
 			if ($issueStatus == "Resolved") {
 				$output .= "</strike>";
 			}
-			$output .= "</a></td>";
-			$output .= "<td>$summary</td>";
-			$output .= "</tr>";
+			$output .= "</a>";
+			$output .= "$summary";
+			$output .= " [$componentsAsString]";
 		}
-		$output .= "</tbody></table>";
+		$output .= "</div>";
 
 		//Return output and let MediaWiki parse the output.		
 		return array( $output, 'noparse' => true,  'isHTML' => true);
