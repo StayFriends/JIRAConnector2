@@ -119,7 +119,7 @@ class JIRAConnector {
 			$output .= "<td><img src=\"$issueTypeIcon\" alt=\"$issueType\"/></td>";
 			$output .= "<td><img src=\"$issueStatusIcon\" alt=\"$issueStatus\"/></td>";
 			$output .= "<td><img src=\"$issuePriorityIconPng\" alt=\"$issuePriority\"/></td>";
-			$output .= "<td><a href=\"$jiraURL/browse/$issueKey\">";
+			$output .= "<td><a href=\"$jiraURL/browse/$issueKey\" title=\"$summary\">";
 			if ($issueStatus == "Resolved") {
 				$output .= "<strike>"	;
 			}
