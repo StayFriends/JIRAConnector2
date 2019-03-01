@@ -117,7 +117,7 @@ class JIRAConnector {
 			$issuePriorityIconPng = str_replace('.svg', '.png', $issuePriorityIcon);
 			$summary = $jiraIssue["fields"][JIRAConnector::JIRAIssueSummary];
 			$issueAssignee = $jiraIssue["fields"][JIRAConnector::JIRAIssueAssignee]["displayName"];
-			$issueAssigneeAvatar = $jiraIssue["fields"][JIRAConnector::JIRAIssueAssignee]["avatarUrls"]["16x16"];
+			$issueAssigneeAvatar = $jiraIssue["fields"][JIRAConnector::JIRAIssueAssignee]["avatarUrls"]->["16x16"];
 //			$components = $jiraIssue["fields"][JIRAConnector::JIRAIssueComponents];
 //			$componentsAsString = implode(array_map(function ($component) {
 //              return $component->getName();
