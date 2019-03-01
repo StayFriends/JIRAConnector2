@@ -124,16 +124,16 @@ class JIRAConnector {
 			$summary = $jiraIssue["fields"][JIRAConnector::JIRAIssueSummary];
 			$issueAssignee = $jiraIssue["fields"][JIRAConnector::JIRAIssueAssignee]["displayName"];
 			$issueAssigneeAvatar = $jiraIssue["fields"][JIRAConnector::JIRAIssueAssignee]["avatarUrls"]["16x16"];
-//			$components = $jiraIssue["fields"][JIRAConnector::JIRAIssueComponents];
-//			$componentsAsString = implode(array_map(function ($component) {
-//              return $component->getName();
-//          }, $components);
+			$components = $jiraIssue["fields"][JIRAConnector::JIRAIssueComponents];
+			$componentsAsString = implode(array_map(function ($component) {
+              return $component->getName();
+            }, $components);
 			
 			$output .= "<tr>";
 			$output .= "<td><img src=\"$issueTypeIcon\" title=\"$issueType\"/></td>";
 			$output .= "<td><img src=\"$issueStatusIcon\" title=\"$issueStatus\"/></td>";
 			$output .= "<td><img src=\"$issuePriorityIconPng\" title=\"$issuePriority\"/></td>";
-//			$output .= "<td>$componentsAsString</td>";
+			$output .= "<td>$componentsAsString</td>";
 			$output .= "<td><img src=\"$issueAssigneeAvatar\" title=\"$issueAssignee\"/></td>";
 			$output .= "<td><a href=\"$jiraURL/browse/$issueKey\" title=\"$summary\">";
 			if ($issueStatus == "Resolved") {
