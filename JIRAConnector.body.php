@@ -69,10 +69,10 @@ class JIRAConnector {
 					JIRAConnector::JIRAIssueKey,
 					JIRAConnector::JIRAIssueType,
 					JIRAConnector::JIRAIssueStatus,
-				    JIRAConnector::JIRAIssuePriority,
+					JIRAConnector::JIRAIssuePriority,
 					JIRAConnector::JIRAIssueSummary,
-				    JIRAConnector:: JIRAIssueComponents,
-				    JIRAConnector::JIRAIssueAssignee
+					JIRAConnector::JIRAIssueComponents,
+					JIRAConnector::JIRAIssueAssignee
 					)
 				);
 
@@ -99,13 +99,13 @@ class JIRAConnector {
 		//Get issue data from JIRA.
 		$returnedIssueData = 
 			JIRAConnector::$jiraWrapper->getIssuesForJQL($text, array(
-        			    JIRAConnector::JIRAIssueKey,
-        			    JIRAConnector::JIRAIssueType,
-        			    JIRAConnector::JIRAIssueStatus,
-        			    JIRAConnector::JIRAIssuePriority,
-        			    JIRAConnector::JIRAIssueSummary,
-        			    JIRAConnector:: JIRAIssueComponents,
-        			    JIRAConnector::JIRAIssueAssignee
+						JIRAConnector::JIRAIssueKey,
+						JIRAConnector::JIRAIssueType,
+						JIRAConnector::JIRAIssueStatus,
+						JIRAConnector::JIRAIssuePriority,
+						JIRAConnector::JIRAIssueSummary,
+						JIRAConnector::JIRAIssueComponents,
+						JIRAConnector::JIRAIssueAssignee
 					));
 
 		//Render output.
@@ -133,7 +133,7 @@ class JIRAConnector {
 			$output .= "<img src=\"$issueStatusIcon\" title=\"$issueStatus\"/>";
 			$output .= "<img src=\"$issuePriorityIconPng\" title=\"$issuePriority\"/>";
 			$output .= "<img src=\"$issueAssigneeAvatar\" title=\"$issueAssignee\" height=\"16\" width=\"16\" />";
-			$output .= "<a href=\"$jiraURL/browse/$issueKey\" title=\"$summary\">";
+			$output .= "<a href=\"$jiraURL/browse/$issueKey\">";
 			if ($issueStatus == "Resolved") {
 				$output .= "<strike>"	;
 			}
